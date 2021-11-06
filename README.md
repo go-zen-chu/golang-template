@@ -1,2 +1,3 @@
 # golang-template
-golang template repository
+
+Github template repository for golang.

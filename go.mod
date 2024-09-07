@@ -1,3 +1,3 @@
 module github.com/go-zen-chu/golang-template
 
-go 1.17
+go 1.23

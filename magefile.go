@@ -31,7 +31,7 @@ func InstallDevTools() error {
 	if err != nil {
 		return fmt.Errorf("installing mockgen: %w\nstdout: %s\nstderr: %s\n", err, outMsg, errMsg)
 	}
-	outMsg, errMsg, err := gbt.RunLongRunningCmdWithLog("brew install golangci-lint")
+	outMsg, errMsg, err = gbt.RunLongRunningCmdWithLog("brew install golangci-lint")
 	if err != nil {
 		return fmt.Errorf("installing mockgen: %w\nstdout: %s\nstderr: %s\n", err, outMsg, errMsg)
 	}

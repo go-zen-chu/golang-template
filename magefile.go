@@ -8,7 +8,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/go-zen-chu/aictl/internal/mage"
+	gbt "github.com/go-zen-chu/go-build-tools"
 )
 
 const imageRegistry = "amasuda"
@@ -27,7 +27,11 @@ setup
 
 // InstallDevTools installs required development tools for this project
 func InstallDevTools() error {
-	outMsg, errMsg, err := mage.RunLongRunningCmdWithLog("go install go.uber.org/mock/mockgen@latest")
+	outMsg, errMsg, err := gbt.RunLongRunningCmdWithLog("go install go.uber.org/mock/mockgen@latest")
+	if err != nil {
+		return fmt.Errorf("installing mockgen: %w\nstdout: %s\nstderr: %s\n", err, outMsg, errMsg)
+	}
+	outMsg, errMsg, err := gbt.RunLongRunningCmdWithLog("brew install golangci-lint")
 	if err != nil {
 		return fmt.Errorf("installing mockgen: %w\nstdout: %s\nstderr: %s\n", err, outMsg, errMsg)
 	}
@@ -39,17 +43,17 @@ workflow
 =======================*/
 
 func DockerLogin() error {
-	return mage.DockerLogin()
+	return gbt.DockerLogin()
 }
 
 func DockerBuildLatest() error {
-	return mage.DockerBuildLatest(imageRegistry, repository, dockerFileLocation)
+	return gbt.DockerBuildLatest(imageRegistry, repository, dockerFileLocation)
 }
 
 func DockerPublishLatest() error {
-	return mage.DockerPublishLatest(imageRegistry, repository)
+	return gbt.DockerPublishLatest(imageRegistry, repository)
 }
 
 func DockerBuildPublishWithGenTag() error {
-	return mage.DockerBuildPublishGeneratedImageTag(imageRegistry, repository, dockerFileLocation)
+	return gbt.DockerBuildPublishGeneratedImageTag(imageRegistry, repository, dockerFileLocation)
 }

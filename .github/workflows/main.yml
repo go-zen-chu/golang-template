@@ -10,7 +10,7 @@ jobs:
     name: Build and Publish docker image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       # docker command is pre-installed in the ubutnu-latest image
       - name: Docker login with mage
         uses: magefile/mage-action@v3

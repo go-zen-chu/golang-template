@@ -12,7 +12,7 @@ import (
 )
 
 const imageRegistry = "amasuda"
-const repository = "aictl"
+const repository = "golang-template"
 const dockerFileLocation = "."
 
 func init() {

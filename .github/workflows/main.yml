@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v5
       # docker command is pre-installed in the ubutnu-latest image
       - name: Docker login with mage
-        uses: magefile/mage-action@v3
+        uses: magefile/mage-action@v4
         with:
           version: latest
           args: DockerLogin
@@ -21,12 +21,12 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Publish image with timestamp
-        uses: magefile/mage-action@v3
+        uses: magefile/mage-action@v4
         with:
           version: latest
           args: DockerBuildPublishWithGenTag
       - name: Publish image with latest tag
-        uses: magefile/mage-action@v3
+        uses: magefile/mage-action@v4
         with:
           version: latest
           args: DockerBuildLatest

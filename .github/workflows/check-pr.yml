@@ -1,15 +1,17 @@
 name: check-pr
+# pull_request (not pull_request_target): PR code runs without secrets and
+# with a read-only token, so a malicious fork PR cannot steal anything.
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, synchronize]
+permissions:
+  contents: read
 jobs:
   check-go:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Pull Request HEAD commit
+      - name: Checkout
         uses: actions/checkout@v5
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set up Golang
         uses: actions/setup-go@v6
         with:
